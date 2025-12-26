@@ -1,0 +1,11 @@
+FROM ubuntu:22.04
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      osm2pgsql postgresql-client ca-certificates curl \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY import.sh /import.sh
+RUN chmod +x /import.sh
+
+CMD ["./import.sh"]
